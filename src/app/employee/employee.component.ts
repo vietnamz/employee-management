@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClientService } from '../service/http-client.service';
+import { HttpClientService, Employee } from '../service/http-client.service';
 
 @Component({
   selector: 'app-employee',
@@ -8,7 +8,7 @@ import { HttpClientService } from '../service/http-client.service';
 })
 export class EmployeeComponent implements OnInit {
 
-  employees:string[];
+  employees:Employee[];
   constructor(
     private httpClientService:HttpClientService
   ) { }
@@ -23,5 +23,11 @@ export class EmployeeComponent implements OnInit {
   {
     this.employees=response;
   }
+  deleteEmployee(employee: Employee): void {
+    this.httpClientService.deleteEmployee(employee)
+      .subscribe( data => {
+        this.employees = this.employees.filter(u => u !== employee);
+      })
+  };
 
 }
