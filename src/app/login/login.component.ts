@@ -11,7 +11,7 @@ import { ThrowStmt } from '@angular/compiler';
 export class LoginComponent implements OnInit {
 
   username = 'delgemoon';
-  password = '';
+  password = 'password';
   invalidLogin = false;
   constructor( 
     private router : Router,
@@ -20,10 +20,14 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   checkLogin() {
+    console.log(this.username);
+    console.log(this.password);
     if (this.loginservice.authenticate(this.username, this.password)) {
       this.router.navigate(['']);
       this.invalidLogin = false;
+      console.log("authentication okay");
     } else {
+      console.log("authentication failed");
       this.invalidLogin = true;
     }
   }
